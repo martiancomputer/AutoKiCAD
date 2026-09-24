@@ -1,0 +1,101 @@
+{
+  "boards": {
+    "backspace1.kicad_pcb": {
+      "board": "backspace1.kicad_pcb",
+      "drc_errors_after": 0,
+      "drc_errors_before": 0,
+      "drc_introduced": 0,
+      "items_added": 2,
+      "progress": 1,
+      "routed": 1,
+      "stripped": 15,
+      "unrouted_after": 1,
+      "unrouted_before": 2
+    },
+    "dp_test.kicad_pcb": {
+      "board": "dp_test.kicad_pcb",
+      "drc_errors_after": 0,
+      "drc_errors_before": 0,
+      "drc_introduced": 0,
+      "items_added": 2,
+      "progress": 1,
+      "routed": 1,
+      "stripped": 15,
+      "unrouted_after": 1,
+      "unrouted_before": 2
+    },
+    "pic_programmer.kicad_pcb": {
+      "board": "pic_programmer.kicad_pcb",
+      "drc_errors_after": 0,
+      "drc_errors_before": 0,
+      "drc_introduced": 0,
+      "items_added": 8,
+      "progress": 5,
+      "routed": 5,
+      "stripped": 376,
+      "unrouted_after": 77,
+      "unrouted_before": 82
+    },
+    "shove_same_net_via.kicad_pcb": {
+      "board": "shove_same_net_via.kicad_pcb",
+      "drc_errors_after": 0,
+      "drc_errors_before": 0,
+      "drc_introduced": 0,
+      "items_added": 4,
+      "progress": 2,
+      "routed": 2,
+      "stripped": 7,
+      "unrouted_after": 0,
+      "unrouted_before": 2
+    },
+    "simple.kicad_pcb": {
+      "board": "simple.kicad_pcb",
+      "drc_errors_after": 0,
+      "drc_errors_before": 0,
+      "drc_introduced": 0,
+      "items_added": 9,
+      "progress": 5,
+      "routed": 5,
+      "stripped": 122,
+      "unrouted_after": 31,
+      "unrouted_before": 36
+    },
+    "stickhub-extra-via.kicad_pcb": {
+      "board": "stickhub-extra-via.kicad_pcb",
+      "drc_errors_after": 54,
+      "drc_errors_before": 54,
+      "drc_introduced": 0,
+      "items_added": 12,
+      "progress": 6,
+      "routed": 5,
+      "stripped": 1381,
+      "unrouted_after": 127,
+      "unrouted_before": 133
+    },
+    "ultrasound.kicad_pcb": {
+      "board": "ultrasound.kicad_pcb",
+      "drc_errors_after": 10,
+      "drc_errors_before": 10,
+      "drc_introduced": 0,
+      "items_added": 5,
+      "progress": 5,
+      "routed": 5,
+      "stripped": 2458,
+      "unrouted_after": 914,
+      "unrouted_before": 919
+    },
+    "video-v10.kicad_pcb": {
+      "board": "video-v10.kicad_pcb",
+      "drc_errors_after": 0,
+      "drc_errors_before": 0,
+      "drc_introduced": 0,
+      "items_added": 5,
+      "progress": 5,
+      "routed": 5,
+      "stripped": 8740,
+      "unrouted_after": 1340,
+      "unrouted_before": 1345
+    }
+  },
+  "routed_count": 5
+}

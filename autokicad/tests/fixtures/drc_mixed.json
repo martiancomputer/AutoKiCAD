@@ -1,0 +1,217 @@
+{
+  "$schema": "https://schemas.kicad.org/drc.v1.json",
+  "coordinate_units": "mm",
+  "date": "2026-08-08T19:46:15",
+  "ignored_checks": [
+    {
+      "description": "Footprint has no courtyard defined",
+      "key": "missing_courtyard"
+    },
+    {
+      "description": "Track endpoint not centered on via",
+      "key": "track_not_centered_on_via"
+    },
+    {
+      "description": "Tuning profile track geometries",
+      "key": "tuning_profile_track_geometries"
+    },
+    {
+      "description": "Footprint doesn't match symbol's footprint filters",
+      "key": "footprint_filters_mismatch"
+    },
+    {
+      "description": "Footprint component type doesn't match footprint pads",
+      "key": "footprint_type_mismatch"
+    }
+  ],
+  "included_severities": [
+    "error",
+    "warning",
+    "exclusion"
+  ],
+  "kicad_version": "10.0.5",
+  "schematic_parity": [
+    {
+      "type": "footprint_symbol_mismatch",
+      "description": "Footprint does not match symbol",
+      "severity": "error",
+      "items": [
+        {
+          "uuid": "dead-beef-0000-0000-000000000002",
+          "description": "Footprint U1",
+          "pos": {
+            "x": 1.0,
+            "y": 2.0
+          }
+        }
+      ]
+    }
+  ],
+  "source": "unrouted.kicad_pcb",
+  "unconnected_items": [
+    {
+      "description": "Missing connection between items",
+      "items": [
+        {
+          "description": "PTH pad 1 [Net-(P3-P1)] of C1",
+          "pos": {
+            "x": 141.605,
+            "y": 99.695
+          },
+          "uuid": "aeded7e3-b278-4188-a018-5517ed785333"
+        },
+        {
+          "description": "PTH pad 1 [Net-(P3-P1)] of P3",
+          "pos": {
+            "x": 128.27,
+            "y": 100.711
+          },
+          "uuid": "808e4f1b-ce1e-4bfb-b9bd-15d1ce3526c9"
+        }
+      ],
+      "severity": "error",
+      "type": "unconnected_items"
+    },
+    {
+      "description": "Missing connection between items",
+      "items": [
+        {
+          "description": "PTH pad 6 [Net-(P3-P1)] of U1",
+          "pos": {
+            "x": 145.765,
+            "y": 108.955
+          },
+          "uuid": "e8fa3875-2076-4de2-b1d6-9c3fb76b7ace"
+        },
+        {
+          "description": "PTH pad 1 [Net-(P3-P1)] of C1",
+          "pos": {
+            "x": 141.605,
+            "y": 99.695
+          },
+          "uuid": "aeded7e3-b278-4188-a018-5517ed785333"
+        }
+      ],
+      "severity": "error",
+      "type": "unconnected_items"
+    },
+    {
+      "description": "Missing connection between items",
+      "items": [
+        {
+          "description": "PTH pad 1 [Net-(P2-P1)] of P2",
+          "pos": {
+            "x": 128.27,
+            "y": 112.776
+          },
+          "uuid": "013d680a-efce-4eb6-a226-1b7a2fef9c33"
+        },
+        {
+          "description": "PTH pad 1 [Net-(P2-P1)] of R3",
+          "pos": {
+            "x": 133.985,
+            "y": 125.095
+          },
+          "uuid": "61e29ef0-01c0-4612-860d-df6b334f1798"
+        }
+      ],
+      "severity": "error",
+      "type": "unconnected_items"
+    }
+  ],
+  "violations": [
+    {
+      "description": "The current configuration does not include the footprint library 'Footprints'",
+      "items": [
+        {
+          "description": "Footprint C1",
+          "pos": {
+            "x": 141.605,
+            "y": 99.695
+          },
+          "uuid": "00000000-0000-0000-0000-000054a581e5"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_issues"
+    },
+    {
+      "description": "The current configuration does not include the footprint library 'Footprints'",
+      "items": [
+        {
+          "description": "Footprint C2",
+          "pos": {
+            "x": 137.16,
+            "y": 125.095
+          },
+          "uuid": "00000000-0000-0000-0000-000054a581ea"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_issues"
+    },
+    {
+      "description": "Silkscreen clipped by board edge",
+      "items": [
+        {
+          "description": "Segment on Edge.Cuts",
+          "pos": {
+            "x": 121.285,
+            "y": 136.525
+          },
+          "uuid": "9b19456e-3ad1-4dde-92c4-23451559e1ba"
+        },
+        {
+          "description": "Segment of P4 on F.Silkscreen",
+          "pos": {
+            "x": 142.922,
+            "y": 125.071
+          },
+          "uuid": "a4d1deb0-9296-4d9f-8b45-b343befbe2e3"
+        }
+      ],
+      "severity": "warning",
+      "type": "silk_edge_clearance"
+    },
+    {
+      "description": "Silkscreen clipped by board edge",
+      "items": [
+        {
+          "description": "Segment on Edge.Cuts",
+          "pos": {
+            "x": 121.285,
+            "y": 136.525
+          },
+          "uuid": "9b19456e-3ad1-4dde-92c4-23451559e1ba"
+        },
+        {
+          "description": "Segment of P4 on F.Silkscreen",
+          "pos": {
+            "x": 153.162,
+            "y": 125.071
+          },
+          "uuid": "fa4e4619-2310-496a-9c63-4fb385cf27a0"
+        }
+      ],
+      "severity": "warning",
+      "type": "silk_edge_clearance"
+    },
+    {
+      "type": "silk_over_copper",
+      "description": "Silkscreen clipped by solder mask",
+      "severity": "warning",
+      "items": [
+        {
+          "uuid": "dead-beef-0000-0000-000000000001",
+          "description": "Segment of R1 on F.Silkscreen",
+          "pos": {
+            "x": 10.5,
+            "y": 20.25
+          }
+        }
+      ],
+      "excluded": true,
+      "comment": "reviewed, acceptable"
+    }
+  ]
+}

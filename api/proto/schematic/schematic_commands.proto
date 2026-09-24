@@ -1,0 +1,259 @@
+/*
+ * This program source code file is part of KiCad, a free EDA CAD application.
+ *
+ * Copyright (C) 2024 KiCad Developers, see AUTHORS.txt for contributors.
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+syntax = "proto3";
+
+package kiapi.schematic.types;
+
+import "common/types/base_types.proto";
+import "common/types/enums.proto";
+import "schematic/schematic_types.proto";
+
+
+message GetSchematicHierarchy
+{
+  // Type must be DT_SCHEMATIC and only the project is considered
+  kiapi.common.types.DocumentSpecifier document = 1;
+}
+
+message SchematicHierarchyResponse
+{
+  kiapi.common.types.DocumentSpecifier document = 1;
+
+  repeated SheetInstance top_level_sheets = 2;
+}
+
+// Returns SchematicNetlistResponse
+message GetSchematicNetlist
+{
+  // Type must be DT_SCHEMATIC and only the project is considered
+  kiapi.common.types.DocumentSpecifier document = 1;
+
+  // Optional filter for types of items to return in SchematicNetSheetContents items fields.
+  // If not specified, all types will be returned.  Only connectable schematic items are valid
+  // here (pins, labels, wires, etc).
+  repeated kiapi.common.types.KiCadObjectType types = 2;
+}
+
+message SchematicNetlistResponse
+{
+  kiapi.common.types.DocumentSpecifier document = 1;
+
+  repeated SchematicNet nets = 2;
+}
+
+
+// Place a symbol from a library onto a sheet.
+//
+// Distinct from CreateItems with a SchematicSymbolInstance, which requires the caller
+// to supply the whole symbol definition -- every pin and graphic. Sending only a LIB_ID
+// there yields a symbol with no body and no pins.
+//
+// This resolves the LIB_ID server-side and builds the SCH_SYMBOL through the same
+// constructor the interactive "Place Symbol" tool uses, so the result is identical to a
+// hand-placed symbol: correct body, pins, unit and field defaults.
+//
+// Returns PlaceSymbolResponse.
+message PlaceSymbol
+{
+  kiapi.common.types.DocumentSpecifier schematic = 1;
+
+  // The library symbol to place, e.g. library_nickname "Device", entry_name "R".
+  kiapi.common.types.LibraryIdentifier lib_id = 2;
+
+  kiapi.common.types.Vector2 position = 3;
+
+  // Unit for a multi-unit symbol. 0 or 1 both mean the first unit.
+  uint32 unit = 4;
+
+  // De Morgan / alternate body style. 0 or 1 both mean the standard body.
+  uint32 body_style = 5;
+
+  // Reference designator, e.g. "R1". Empty leaves the library default, which is an
+  // unannotated form such as "R?".
+  string reference = 6;
+
+  // Value text, e.g. "10k". Empty keeps the library's own value.
+  string value = 7;
+
+  // Orientation and mirroring. Unset (SSO_UNKNOWN) means SSO_0, so a caller that
+  // does not care about rotation can leave the whole transform out.
+  kiapi.schematic.types.SchematicSymbolTransform transform = 8;
+}
+
+message PlaceSymbolResponse
+{
+  // The placed symbol, as it now exists on the sheet.
+  kiapi.schematic.types.SchematicSymbolInstance symbol = 1;
+}
+
+
+// Search the configured symbol libraries.
+//
+// The counterpart to SearchFootprints on the board side, and the step before
+// PlaceSymbol: an agent has to be able to *find* ESP32-S3-WROOM-1 before it can
+// place it.
+//
+// There is no symbol equivalent of FOOTPRINT_LIST's on-disk cache, but searching is
+// still cheap in practice: eeschema's startup calls PreloadLibraries()
+// asynchronously, so by the time a client can talk to the API the libraries are
+// already in memory. Measured on a full stock install plus a user library,
+// unscoped: 22,830 symbols in 0.2 s. Pass `libraries` to narrow the result set,
+// not for speed.
+//
+// Returns SearchSymbolsResponse.
+message SearchSymbols
+{
+  kiapi.common.types.DocumentSpecifier schematic = 1;
+
+  // Case-insensitive substring, matched against symbol name, library nickname,
+  // description and keywords. Empty returns everything, subject to max_results.
+  string query = 2;
+
+  // Restrict to these library nicknames. Empty searches all of them.
+  repeated string libraries = 3;
+
+  // Cap on returned entries. 0 means the server default.
+  uint32 max_results = 4;
+
+  // Require every whitespace-separated term to match rather than the string as a
+  // whole. "esp32 wroom" finds ESP32-S3-WROOM-1 this way; as one substring it
+  // matches nothing.
+  bool match_all_terms = 5;
+
+  // Return only power symbols (+3V3, GND and friends), which are what wiring up a
+  // part's supply pins needs and are otherwise buried among thousands of results.
+  bool power_only = 6;
+}
+
+message SymbolSearchResult
+{
+  kiapi.common.types.LibraryIdentifier id = 1;
+  string description = 2;
+  string keywords = 3;
+
+  // Pin count across all units, and how many units the symbol has. Both matter
+  // when checking a symbol against a footprint before committing to it.
+  uint32 pin_count = 4;
+  uint32 unit_count = 5;
+
+  bool is_power = 6;
+}
+
+message SearchSymbolsResponse
+{
+  repeated SymbolSearchResult results = 1;
+
+  // True when max_results cut the list short, so a caller can tell "these are all
+  // the matches" from "these are the first N".
+  bool truncated = 2;
+
+  // How many symbols were considered.
+  uint32 total_indexed = 3;
+
+  // Libraries that could not be read, with the reason. Reported rather than
+  // dropped: a silently short result list looks the same as a correct one.
+  repeated string errors = 4;
+}
+
+
+message ErcAffectedItem
+{
+  kiapi.common.types.KIID id = 1;
+
+  // Human-readable description, e.g. "Pin 1 [VCC] of U1".
+  string description = 2;
+
+  // Position in the units requested by RunErc.
+  kiapi.common.types.Vector2 position = 3;
+}
+
+// One ERC finding.
+message ErcViolation
+{
+  // Machine-readable check key, e.g. "pin_not_connected", "power_pin_not_driven".
+  // Matches the settings key used in the schematic's ERC severity configuration.
+  string type = 1;
+
+  string description = 2;
+
+  kiapi.common.types.RuleSeverity severity = 3;
+
+  repeated ErcAffectedItem items = 4;
+
+  // True when the violation is excluded in the schematic's exclusion list.
+  // Excluded violations are only returned when RS_EXCLUSION is requested.
+  bool excluded = 5;
+
+  // Exclusion rationale; only meaningful when excluded is true.
+  string exclusion_comment = 6;
+
+  // Human-readable sheet the violation is on, e.g. "/" or "/power". ERC groups
+  // findings per sheet, unlike DRC, and on a hierarchical design the same check
+  // firing on two sheets is two different problems.
+  string sheet_path = 7;
+
+  // The same sheet as a UUID path, for resolving against GetSchematicHierarchy.
+  string sheet_uuid_path = 8;
+}
+
+// A check disabled in the schematic's ERC severity configuration, and so not run.
+// Reported so a caller can tell "no violations" from "never looked".
+message ErcIgnoredCheck
+{
+  string key = 1;
+  string description = 2;
+}
+
+// Run the electrical rules check over the open schematic.
+//
+// The schematic counterpart to RunDrc, and built on the same shared report
+// builder (ERC_REPORT::BuildReport) so results are identical to
+// `kicad-cli sch erc --format json`.
+//
+// The payoff over the CLI is the same as for DRC: this sees the schematic **as it
+// currently is in the editor**, unsaved edits included. The CLI can only read the
+// last saved file.
+//
+// Returns RunErcResponse.
+message RunErc
+{
+  kiapi.common.types.DocumentSpecifier schematic = 1;
+
+  // Units used for the coordinates in the response. Defaults to millimetres.
+  kiapi.common.types.Units units = 2;
+
+  // Severities to include. When empty, errors and warnings are reported and
+  // exclusions are omitted.
+  repeated kiapi.common.types.RuleSeverity severities = 3;
+}
+
+message RunErcResponse
+{
+  repeated ErcViolation violations = 1;
+
+  // Checks that were switched off, so an empty violation list is interpretable.
+  repeated ErcIgnoredCheck ignored_checks = 2;
+
+  // Units the coordinates are in, echoed back.
+  kiapi.common.types.Units units = 3;
+
+  // The severities actually included, after defaults were applied.
+  repeated kiapi.common.types.RuleSeverity included_severities = 4;
+}

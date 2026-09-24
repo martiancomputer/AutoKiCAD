@@ -1,0 +1,9 @@
+# Generated protobuf bindings. Not committed: they must match api/proto/** in
+# the checked-out KiCad tree, which moves. Regenerate with:
+#     python -m autokicad.ipc.codegen
+# and verify freshness in CI with:
+#     python -m autokicad.ipc.codegen --check
+ipc/_proto/
+
+__pycache__/
+.pytest_cache/

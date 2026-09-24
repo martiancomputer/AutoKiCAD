@@ -1,0 +1,650 @@
+{
+  "$schema": "https://schemas.kicad.org/drc.v1.json",
+  "coordinate_units": "mm",
+  "date": "2026-08-08T19:14:24",
+  "ignored_checks": [
+    {
+      "description": "Footprint has no courtyard defined",
+      "key": "missing_courtyard"
+    },
+    {
+      "description": "Copper sliver",
+      "key": "copper_sliver"
+    },
+    {
+      "description": "Copper connection too narrow",
+      "key": "connection_width"
+    },
+    {
+      "description": "Track endpoint not centered on via",
+      "key": "track_not_centered_on_via"
+    },
+    {
+      "description": "Tuning profile track geometries",
+      "key": "tuning_profile_track_geometries"
+    },
+    {
+      "description": "Footprint doesn't match symbol's footprint filters",
+      "key": "footprint_filters_mismatch"
+    },
+    {
+      "description": "Silkscreen clipped by solder mask",
+      "key": "silk_over_copper"
+    },
+    {
+      "description": "Silkscreen clipped by board edge",
+      "key": "silk_edge_clearance"
+    }
+  ],
+  "included_severities": [
+    "error",
+    "warning",
+    "exclusion"
+  ],
+  "kicad_version": "10.0.5",
+  "schematic_parity": [],
+  "source": "video.kicad_pcb",
+  "unconnected_items": [],
+  "violations": [
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C1",
+          "pos": {
+            "x": 358.521,
+            "y": 58.293
+          },
+          "uuid": "00000000-0000-0000-0000-00005402caa6"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C3",
+          "pos": {
+            "x": 358.14,
+            "y": 73.787
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cabc"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1210_3225Metric_Pad1.30x2.65mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C39",
+          "pos": {
+            "x": 333.248,
+            "y": 131.699
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cc49"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1210_3225Metric_Pad1.30x2.65mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C40",
+          "pos": {
+            "x": 307.086,
+            "y": 131.699
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cc55"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1210_3225Metric_Pad1.30x2.65mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C41",
+          "pos": {
+            "x": 300.355,
+            "y": 131.572
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cc61"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C47",
+          "pos": {
+            "x": 358.521,
+            "y": 60.833
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cca5"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C58",
+          "pos": {
+            "x": 82.169,
+            "y": 92.71
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cd20"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C60",
+          "pos": {
+            "x": 81.432003,
+            "y": 100.609389
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cd36"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C61",
+          "pos": {
+            "x": 68.707,
+            "y": 102.235
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cd41"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1210_3225Metric_Pad1.30x2.65mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C63",
+          "pos": {
+            "x": 123.825,
+            "y": 60.092628
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cd58"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R1",
+          "pos": {
+            "x": 123.825,
+            "y": 63.119
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cf1e"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R4",
+          "pos": {
+            "x": 67.945,
+            "y": 111.887
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cf3f"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R8",
+          "pos": {
+            "x": 348.234,
+            "y": 131.699
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cf6b"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R10",
+          "pos": {
+            "x": 70.739,
+            "y": 76.835
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cf81"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R11",
+          "pos": {
+            "x": 77.343,
+            "y": 76.835
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cf8c"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R14",
+          "pos": {
+            "x": 358.521,
+            "y": 63.627
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cfad"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R22",
+          "pos": {
+            "x": 294.767,
+            "y": 131.572
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d005"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R23",
+          "pos": {
+            "x": 313.69,
+            "y": 132.08
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d010"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R24",
+          "pos": {
+            "x": 339.598,
+            "y": 131.318
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d01b"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R28",
+          "pos": {
+            "x": 111.76,
+            "y": 114.935
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d047"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R29",
+          "pos": {
+            "x": 114.3,
+            "y": 111.76
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d052"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R45",
+          "pos": {
+            "x": 67.945,
+            "y": 116.205
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d102"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'SOIC-20W_7.5x12.8mm_P1.27mm' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint U6",
+          "pos": {
+            "x": 197.739,
+            "y": 138.811
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d249"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint W2",
+          "pos": {
+            "x": 119.4,
+            "y": 125.2
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d8e2"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint W3",
+          "pos": {
+            "x": 122.3,
+            "y": 125.2
+          },
+          "uuid": "00000000-0000-0000-0000-00005402d8eb"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint R35",
+          "pos": {
+            "x": 353.5,
+            "y": 59.2925
+          },
+          "uuid": "00000000-0000-0000-0000-00005b22196e"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C2",
+          "pos": {
+            "x": 345.567,
+            "y": 67.437
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cab1"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C4",
+          "pos": {
+            "x": 355.981,
+            "y": 78.105
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cac7"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C5",
+          "pos": {
+            "x": 346.202,
+            "y": 97.282
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cad2"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C6",
+          "pos": {
+            "x": 345.567,
+            "y": 73.279
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cadd"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C7",
+          "pos": {
+            "x": 338.201,
+            "y": 87.757
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cae8"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C8",
+          "pos": {
+            "x": 349.123,
+            "y": 58.039
+          },
+          "uuid": "00000000-0000-0000-0000-00005402caf3"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C9",
+          "pos": {
+            "x": 333.883,
+            "y": 64.897
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cafe"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C10",
+          "pos": {
+            "x": 344.297,
+            "y": 87.757
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb09"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C11",
+          "pos": {
+            "x": 319.278,
+            "y": 69.977
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb14"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C12",
+          "pos": {
+            "x": 345.567,
+            "y": 80.391
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb1f"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C13",
+          "pos": {
+            "x": 326.009,
+            "y": 64.643
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb2a"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C14",
+          "pos": {
+            "x": 324.231,
+            "y": 81.915
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb35"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C15",
+          "pos": {
+            "x": 325.755,
+            "y": 87.249
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb40"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    },
+    {
+      "description": "Footprint 'R_1206_3216Metric_Pad1.30x1.75mm_HandSolder' does not match copy in library 'footprints'",
+      "items": [
+        {
+          "description": "Footprint C16",
+          "pos": {
+            "x": 338.201,
+            "y": 84.709
+          },
+          "uuid": "00000000-0000-0000-0000-00005402cb4b"
+        }
+      ],
+      "severity": "warning",
+      "type": "lib_footprint_mismatch"
+    }
+  ]
+}

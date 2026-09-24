@@ -1,0 +1,318 @@
+/*
+ * This program source code file is part of KiCad, a free EDA CAD application.
+ *
+ * Copyright (C) 2024 KiCad Developers, see AUTHORS.txt for contributors.
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+syntax = "proto3";
+
+package kiapi.common.commands;
+
+import "common/types/base_types.proto";
+
+message GetVersion
+{
+}
+
+message GetVersionResponse
+{
+  kiapi.common.types.KiCadVersion version = 1;
+}
+
+// A command to check if the connection to KiCad is OK
+message Ping
+{
+}
+
+// Returns the full path to the given KiCad binary
+message GetKiCadBinaryPath
+{
+  // The short name of the binary, such as `kicad-cli` or `kicad-cli.exe`.  If on Windows, an `.exe`
+  // extension will be assumed if not present.
+  string binary_name = 1;
+}
+
+message PathResponse
+{
+  string path = 1;
+}
+
+// returns kiapi.common.types.Box2
+message GetTextExtents
+{
+  // A temporary text item to calculate the bounding box for
+  kiapi.common.types.Text text = 1;
+}
+
+message TextOrTextBox
+{
+  oneof inner {
+    kiapi.common.types.Text text = 1;
+    kiapi.common.types.TextBox textbox = 2;
+  }
+}
+
+// Render the given text object(s) as shapes.  Depending on whether the text is using
+// the KiCad stroke font or a custom font, the response will be a compound shape containing
+// a set of polygons or a set of segments.
+message GetTextAsShapes
+{
+  repeated TextOrTextBox text = 1;
+}
+
+message TextWithShapes
+{
+  TextOrTextBox text = 1;
+
+  kiapi.common.types.CompoundShape shapes = 2;
+}
+
+message GetTextAsShapesResponse
+{
+  repeated TextWithShapes text_with_shapes = 1;
+}
+
+// Return a writeable path that a plugin can use for storing persistent data such as configuration
+// files, etc.  This path may not yet exist; actual creation of the directory for a given plugin is
+// up to the plugin itself.  Files in this path will not be modified if the plugin is uninstalled or
+// upgraded.
+//
+// Returns StringResponse
+message GetPluginSettingsPath
+{
+  // The identifier of the plugin
+  string identifier = 1;
+}
+
+message StringResponse
+{
+  string response = 1;
+}
+
+
+// Which transmission-line geometry to model.
+enum TransmissionLineType
+{
+  TLT_UNKNOWN = 0;
+  TLT_MICROSTRIP = 1;
+  TLT_COUPLED_MICROSTRIP = 2;
+  TLT_STRIPLINE = 3;
+  TLT_COUPLED_STRIPLINE = 4;
+  TLT_COPLANAR = 5;
+  TLT_COAX = 6;
+  TLT_TWISTED_PAIR = 7;
+  TLT_RECTANGULAR_WAVEGUIDE = 8;
+}
+
+// Inputs and outputs of a transmission-line calculation. Mirrors
+// TRANSLINE_PARAMETERS in common/transline_calculations/. Which are inputs and
+// which are results depends on the calculation type and mode, so they share one
+// namespace rather than being split.
+enum TransmissionLineParameter
+{
+  TLP_UNKNOWN = 0;
+
+  // Substrate and material
+  TLP_EPSILON_R = 1;              // dielectric constant
+  TLP_TAN_D = 2;                  // dielectric loss tangent
+  TLP_RHO = 3;                    // conductor resistivity
+  TLP_SUBSTRATE_HEIGHT = 4;       // H
+  TLP_TOP_HEIGHT = 5;             // H_T
+  TLP_CONDUCTOR_THICKNESS = 6;    // T
+  TLP_ROUGHNESS = 7;
+  TLP_MU_R = 8;                   // substrate permeability
+  TLP_MU_R_CONDUCTOR = 9;
+
+  // Geometry
+  TLP_PHYS_WIDTH = 10;
+  TLP_PHYS_SPACING = 11;          // gap between line and ground / between pair
+  TLP_PHYS_LENGTH = 12;
+  TLP_PHYS_DIAMETER_IN = 13;
+  TLP_PHYS_DIAMETER_OUT = 14;
+  TLP_STRIPLINE_A = 15;           // track to top plane
+  TLP_TWISTS_PER_LENGTH = 16;
+  TLP_TWISTEDPAIR_EPSILON_R_ENV = 17;
+
+  TLP_FREQUENCY = 18;
+
+  // Impedance
+  TLP_Z0 = 19;
+  TLP_Z0_EVEN = 20;
+  TLP_Z0_ODD = 21;
+  TLP_Z_DIFF = 22;
+  TLP_Z_COMMON = 23;
+  TLP_ELECTRICAL_LENGTH = 24;     // ANG_L
+
+  // Results
+  TLP_EPSILON_EFF = 25;
+  TLP_UNIT_PROP_DELAY = 26;       // ps/cm
+  TLP_LOSS_CONDUCTOR = 27;        // dB
+  TLP_LOSS_DIELECTRIC = 28;       // dB
+  TLP_SKIN_DEPTH = 29;
+  TLP_CUTOFF_FREQUENCY = 30;
+
+  // Conductivity, loss terms, coupled-line results and the substrate models.
+  // Calculators zero-initialise every parameter they declare, so omitting an
+  // input a given geometry needs yields nonsense rather than an error -- notably
+  // a zero SIGMA drives the loss terms and can push Z0 negative.
+  TLP_SIGMA = 31;                       // conductor conductivity, S/m
+  TLP_ATTEN_CONDUCTOR = 32;             // conductor attenuation
+  TLP_ATTEN_DIELECTRIC = 33;            // dielectric attenuation
+  TLP_EPSILON_EFF_EVEN = 34;            // even-mode eps_eff
+  TLP_EPSILON_EFF_ODD = 35;             // odd-mode eps_eff
+  TLP_UNIT_PROP_DELAY_EVEN = 36;        // even-mode delay
+  TLP_UNIT_PROP_DELAY_ODD = 37;         // odd-mode delay
+  TLP_COUPLING_K = 38;                  // coupling coefficient
+  TLP_DIELECTRIC_MODEL = 39;            // 0 constant, 1 Djordjevic-Sarkar
+  TLP_EPSILON_R_SPEC_FREQ = 40;         // frequency eps_r/tan_d specified at
+  TLP_SOLDERMASK_PRESENT = 41;          // 1 = mask present
+  TLP_SOLDERMASK_THICKNESS = 42;        // mask thickness, m
+  TLP_SOLDERMASK_EPSILON_R = 43;        // mask permittivity
+  TLP_SOLDERMASK_TAND = 44;             // mask loss tangent
+  TLP_CPW_BACKMETAL = 45;               // coplanar back metal present
+}
+
+message TransmissionLineValue
+{
+  TransmissionLineParameter parameter = 1;
+  double value = 2;
+}
+
+// How to solve.
+enum TransmissionLineMode
+{
+  TLM_UNKNOWN = 0;
+
+  // Compute electrical results from a known geometry.
+  TLM_ANALYSE = 1;
+
+  // Solve for a geometry parameter that hits the requested impedance. The
+  // parameter to solve for is `synthesize_target`.
+  TLM_SYNTHESISE = 2;
+}
+
+// Options for synthesis, mirroring SYNTHESIZE_OPTS.
+enum TransmissionLineSynthesisOption
+{
+  TLSO_DEFAULT = 0;
+  TLSO_FIX_WIDTH = 1;            // hold a differential pair's width
+  TLSO_FIX_SPACING = 2;          // hold a differential pair's spacing
+  TLSO_FROM_ZDIFF_ZCOMM = 3;     // target Z_DIFF / Z_COMMON instead of even/odd
+}
+
+// Runs a transmission-line calculation. Needs no open document.
+//
+// Analysis reports impedance, effective permittivity, propagation delay and
+// losses for a geometry. Synthesis inverts that: given a target impedance it
+// solves for a geometry parameter -- which is what impedance-controlled routing
+// needs to pick a trace width for a stackup.
+//
+// Returns RunTransmissionLineCalculationResponse.
+message RunTransmissionLineCalculation
+{
+  TransmissionLineType type = 1;
+
+  TransmissionLineMode mode = 2;
+
+  // Inputs. Units follow the underlying calculator: metres for lengths, hertz
+  // for frequency, ohms for impedance, degrees for electrical length.
+  repeated TransmissionLineValue parameters = 3;
+
+  // Only used when mode is TLM_SYNTHESISE.
+  TransmissionLineParameter synthesize_target = 4;
+  TransmissionLineSynthesisOption synthesis_option = 5;
+}
+
+message RunTransmissionLineCalculationResponse
+{
+  // Every parameter after the calculation: inputs echoed back plus results.
+  repeated TransmissionLineValue parameters = 1;
+
+  // False when synthesis failed to converge. Analysis always succeeds, so this
+  // is only meaningful for TLM_SYNTHESISE.
+  bool converged = 2;
+}
+
+
+// Which kind of library table to query. KiCad keeps a separate table per type.
+enum LibraryType
+{
+  LBT_UNKNOWN = 0;
+  LBT_SYMBOL = 1;
+  LBT_FOOTPRINT = 2;
+  LBT_DESIGN_BLOCK = 3;
+}
+
+enum LibraryScope
+{
+  LBS_UNKNOWN = 0;
+
+  // Configured for the user, available to every project.
+  LBS_GLOBAL = 1;
+
+  // Configured in the open project's own table, e.g. a ${KIPRJMOD} path.
+  LBS_PROJECT = 2;
+}
+
+// List the libraries KiCad is configured to use.
+//
+// This is the first thing an agent needs: it cannot resolve a part to a LIB_ID
+// without knowing which libraries exist. Reads the library tables directly, so it
+// needs no open document and does not load any library from disk.
+//
+// Returns ListLibrariesResponse.
+message ListLibraries
+{
+  LibraryType type = 1;
+
+  // Restrict to one scope. Unset (LBS_UNKNOWN) returns both.
+  LibraryScope scope = 2;
+}
+
+message LibraryInfo
+{
+  string nickname = 1;
+  string description = 2;
+
+  // The URI as configured, with variables such as ${KIPRJMOD} left unexpanded.
+  string uri = 3;
+
+  // The URI with variables substituted -- the actual path on disk. Reported
+  // separately because an unresolvable variable is a common misconfiguration and
+  // is invisible in `uri` alone.
+  string resolved_uri = 4;
+
+  // Plugin type, e.g. "KiCad" or "Altium".
+  string plugin_type = 5;
+
+  LibraryScope scope = 6;
+
+  // False when the row is disabled. A disabled library is still listed, because
+  // "configured but off" and "absent" are different problems for a caller.
+  bool enabled = 7;
+
+  // False when the row is hidden from library browsers.
+  bool visible = 8;
+
+  // False when KiCad could not validate the row; error carries the reason.
+  bool ok = 9;
+  string error = 10;
+}
+
+message ListLibrariesResponse
+{
+  repeated LibraryInfo libraries = 1;
+}
